@@ -18,7 +18,7 @@ import com.heycristhian.repository.FuncionarioRepository;
 
 @RestController
 @CrossOrigin
-@RequestMapping("heycristhian-service/funcionarios")
+@RequestMapping("service/funcionarios")
 public class FuncionarioController {
 
 	@Autowired
