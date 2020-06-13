@@ -46,4 +46,12 @@ public class Cargo {
 		this.salario = salario;
 	}
 
+	@Override
+	public String toString() {
+		return "Cargo{" +
+				"id=" + id +
+				", descricao='" + descricao + '\'' +
+				", salario=" + salario +
+				'}';
+	}
 }

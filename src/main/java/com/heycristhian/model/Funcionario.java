@@ -22,7 +22,8 @@ public class Funcionario {
 	public Funcionario() {
 	}
 
-	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Cargo cargo) {
+	public Funcionario(Long id, String nome, String cpf, LocalDate dataNascimento, Cargo cargo) {
+		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
@@ -68,4 +69,14 @@ public class Funcionario {
 		this.dataNascimento = dataNascimento;
 	}
 
+	@Override
+	public String toString() {
+		return "Funcionario{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", cpf='" + cpf + '\'' +
+				", dataNascimento=" + dataNascimento +
+				", cargo=" + cargo +
+				'}';
+	}
 }

@@ -36,7 +36,6 @@ public class FuncionarioController {
 		} else {
 			funcionarios = funcionarioRepository.findByNome(consulta);
 		}
-
 		return FuncionarioDto.converter(funcionarios);
 	}
 
@@ -46,7 +45,27 @@ public class FuncionarioController {
 		Funcionario funcionario = funcionarioForm.converter(cargoRepository);
 		funcionarioRepository.save(funcionario);
 		
-		URI uri = uriBuilder.path("/totvs-service/funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri();
+		URI uri = uriBuilder.path("/service/funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri();
 		return ResponseEntity.created(uri).body(new FuncionarioDto(funcionario));
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable String id) {
+		try {
+			Funcionario funcionario = funcionarioRepository.findById(Long.parseLong(id)).get();
+			funcionarioRepository.delete(funcionario);
+			System.out.println("ID do delete: " + id);
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
+		}
+		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping
+	public ResponseEntity<Void> update(@RequestBody FuncionarioForm form) {
+		Funcionario funcionario = form.converter(cargoRepository);
+		funcionarioRepository.save(funcionario);
+		return ResponseEntity.noContent().build();
 	}
 }

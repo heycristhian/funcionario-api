@@ -10,12 +10,13 @@ public class FuncionarioDto {
 	private Long id;
 	private String nome;
 	private CargoDto cargo;
+	private String cpf;
 
 	public FuncionarioDto(Funcionario funcionario) {
-
 		this.id = funcionario.getId();
 		this.nome = funcionario.getNome();
 		this.cargo = new CargoDto(funcionario.getCargo());
+		this.cpf = funcionario.getCpf();
 	}
 
 	public Long getId() {
@@ -29,6 +30,8 @@ public class FuncionarioDto {
 	public CargoDto getCargo() {
 		return cargo;
 	}
+
+	public String getCpf() { return cpf; }
 
 	public static List<FuncionarioDto> converter(List<Funcionario> funcionarios) {
 		return funcionarios.stream().map(FuncionarioDto::new).collect(Collectors.toList());
