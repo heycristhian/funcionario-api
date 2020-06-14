@@ -17,16 +17,14 @@ public class Funcionario {
 
 	private String nome;
 	private String cpf;
-	private LocalDate dataNascimento;
 
 	public Funcionario() {
 	}
 
-	public Funcionario(Long id, String nome, String cpf, LocalDate dataNascimento, Cargo cargo) {
+	public Funcionario(Long id, String nome, String cpf, Cargo cargo) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
 		this.cargo = cargo;
 	}
 
@@ -61,13 +59,7 @@ public class Funcionario {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
 
 	@Override
 	public String toString() {
@@ -75,7 +67,6 @@ public class Funcionario {
 				"id=" + id +
 				", nome='" + nome + '\'' +
 				", cpf='" + cpf + '\'' +
-				", dataNascimento=" + dataNascimento +
 				", cargo=" + cargo +
 				'}';
 	}

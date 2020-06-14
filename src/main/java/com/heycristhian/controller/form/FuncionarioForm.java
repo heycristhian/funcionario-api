@@ -11,7 +11,6 @@ public class FuncionarioForm {
 	private Long id;
 	private String nome;
 	private String cpf;	
-	private LocalDate dataNascimento;	
 	private String descricaoCargo;
 
 	public String getDescricaoCargo() {
@@ -38,10 +37,6 @@ public class FuncionarioForm {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -50,13 +45,9 @@ public class FuncionarioForm {
 		this.id = id;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public Funcionario converter(CargoRepository repository) {
 		Cargo cargo = repository.findByDescricao(this.descricaoCargo);
-		return new Funcionario(this.id, this.nome, this.cpf, this.dataNascimento, cargo);
+		return new Funcionario(this.id, this.nome, this.cpf, cargo);
 	}
 
 	@Override
@@ -65,7 +56,6 @@ public class FuncionarioForm {
 				"id=" + id +
 				", nome='" + nome + '\'' +
 				", cpf='" + cpf + '\'' +
-				", dataNascimento=" + dataNascimento +
 				", descricaoCargo='" + descricaoCargo + '\'' +
 				'}';
 	}

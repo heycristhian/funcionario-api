@@ -1,5 +1,6 @@
 package com.heycristhian.controller.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class FuncionarioDto {
 	private String nome;
 	private CargoDto cargo;
 	private String cpf;
+	private LocalDate dataNascimento;
 
 	public FuncionarioDto(Funcionario funcionario) {
 		this.id = funcionario.getId();

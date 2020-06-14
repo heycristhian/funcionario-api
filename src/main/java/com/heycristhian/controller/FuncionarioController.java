@@ -29,7 +29,7 @@ public class FuncionarioController {
 
 	@GetMapping
 	@Transactional
-	public List<FuncionarioDto> hello(String consulta) {
+	public List<FuncionarioDto> find(String consulta) {
 		List<Funcionario> funcionarios;
 		if (consulta == null) {
 			funcionarios = funcionarioRepository.findAll();
@@ -39,12 +39,19 @@ public class FuncionarioController {
 		return FuncionarioDto.converter(funcionarios);
 	}
 
+	@GetMapping("/{id}")
+	@Transactional
+	public ResponseEntity<FuncionarioDto> findById(@PathVariable Long id) {
+		Funcionario funcionario = funcionarioRepository.findById(id).get();
+		return ResponseEntity.ok(new FuncionarioDto(funcionario));
+	}
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<FuncionarioDto> inserirFuncionario(@RequestBody FuncionarioForm funcionarioForm, UriComponentsBuilder uriBuilder) {
 		Funcionario funcionario = funcionarioForm.converter(cargoRepository);
 		funcionarioRepository.save(funcionario);
-		
+		System.out.println(funcionarioForm);
 		URI uri = uriBuilder.path("/service/funcionarios/{id}").buildAndExpand(funcionario.getId()).toUri();
 		return ResponseEntity.created(uri).body(new FuncionarioDto(funcionario));
 	}
@@ -64,6 +71,7 @@ public class FuncionarioController {
 
 	@PutMapping
 	public ResponseEntity<Void> update(@RequestBody FuncionarioForm form) {
+		System.out.println(form);
 		Funcionario funcionario = form.converter(cargoRepository);
 		funcionarioRepository.save(funcionario);
 		return ResponseEntity.noContent().build();
